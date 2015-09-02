@@ -1,0 +1,292 @@
+<?php
+/**
+ * @author ivelazquex <isai.velazquez@gmail.com>
+ */
+    $_code = $this->getMethodCode();     
+    $_model = $this->getMethod();    
+    $_billingInfo = $_model->getBillingInfo();
+    
+    if ($_model->showLogoPagoFacil())
+    {
+?>
+<div id="iframe-warning" class="warning-message">
+    <a href="https://www.pagofacil.net" target="_blank">
+        <img src="https://www.pagofacil.net/images/logo_tarjetas.png" width="110" />
+    </a>    
+</div>
+<?php
+    }
+?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    
+    <li>
+        <label for="<?php echo $_code ?>_nombre" class="required">
+            <em>*</em><?php echo $this->__('Nombre Titular') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Nombre Titular') ?>"
+                   class="input-text required-entry validate-length maximum-length-50"
+                   id="<?php echo $_code ?>_nombre"
+                   name="payment[nombre]"
+                   value="<?php echo substr(trim($_billingInfo['firstname']), 0, 50) ?>"
+                   maxlength="50"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_apellidos" class="required">
+            <em>*</em><?php echo $this->__('Apellidos Titular') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Apellidos Titular') ?>"
+                   class="input-text required-entry validate-length maximum-length-50"
+                   id="<?php echo $_code ?>_apellidos"
+                   name="payment[apellidos]"
+                   value="<?php echo substr(trim($_billingInfo['lastname']), 0, 50) ?>"
+                   maxlength="50"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_numero_tarjeta" class="required">
+            <em>*</em><?php echo $this->__('N&uacute;mero Tarjeta') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('N&uacute;mero Tarjeta') ?>"
+                   class="input-text required-entry validate-digits validate-length minimum-length-15 maximum-length-16"
+                   id="<?php echo $_code; ?>_numero_tarjeta"
+                   name="payment[numero_tarjeta]"
+                   value=""
+                   maxlength="16"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_cvt" class="required">
+            <em>*</em>CVT (<?php echo $this->__('c&oacute;digo de seguridad de la tarjeta') ?>) :
+        </label>
+        <div class="input-box">
+            <div class="v-fix">
+                <input type="text" title="<?php echo $this->__('c&oacute;digo de seguridad de la tarjeta') ?>"
+                       class="input-text required-entry validate-digits validate-length minimum-length-3 maximum-length-4"
+                       id="<?php echo $_code ?>_cvt"
+                       name="payment[cvt]"
+                       value=""
+                       maxlength="4"
+                />
+            </div>
+        </div>
+        <div class="v-fix">
+            <a class="cvv-what-is-this" href="#"><?php echo $this->__('Qu&eacute; es esto') ?>?</a>
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_mes_expiracion" class="required">
+            <em>*</em><?php echo $this->__('Fecha de Expiraci&oacute;n') ?> :
+        </label>
+        <div class="input-box">
+            <div class="v-fix">
+                <select class="required-entry"
+                        id="<?php echo $_code ?>_mes_expiracion"
+                        name="payment[mes_expiracion]"
+                >
+                    <option value=""><?php echo $this->__('Mes') ?></option>
+                    <option value="01">01 - enero</option>
+                    <option value="02">02 - febrero</option>
+                    <option value="03">03 - marzo</option>
+                    <option value="04">04 - abril</option>
+                    <option value="05">05 - mayo</option>
+                    <option value="06">06 - junio</option>
+                    <option value="07">07 - julio</option>
+                    <option value="08">08 - agosto</option>
+                    <option value="09">09 - septiembre</option>
+                    <option value="10">10 - octubre</option>
+                    <option value="11">11 - noviembre</option>
+                    <option value="12">12 - diciembre</option>
+                </select>
+            </div>
+        </div>
+        <div class="v-fix">
+            <select class="required-entry"
+                    id="<?php echo $_code ?>_anyo_expiracion"
+                    name="payment[anyo_expiracion]"
+            >
+                <option value=""><?php echo $this->__('A&ntilde;o') ?></option>
+                <?php                
+                    $anyoActual = date('Y');
+                    $anyoHasta = $anyoActual + 10;
+                    for($i = $anyoActual; $i <= $anyoHasta; $i++)
+                    {
+                        echo '<option value="' . substr($i, -2).'">'.$i.'</option>';
+                    }                 
+                ?>
+            </select>
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_telefono" class="required">
+            <em>*</em><?php echo $this->__('Tel&eacute;fono(10 d&iacute;gitos)') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Telefono(10 d&iacute;gitos)') ?>"
+                   class="input-text required-entry validate-digits validate-length minimum-length-10 maximum-length-10"
+                   id="<?php echo $_code ?>_telefono"
+                   name="payment[telefono]"
+                   value="<?php echo substr(trim($_billingInfo['telephone']), 0, 10) ?>"
+                   maxlength="10"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_celular" class="required">
+            <em>*</em><?php echo $this->__('Celular(10 d&iacute;gitos)') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Celular(10 d&iacute;gitos)') ?>"
+                   class="input-text required-entry validate-digits validate-length minimum-length-10 maximum-length-10"
+                   id="<?php echo $_code ?>_celular"
+                   name="payment[celular]"
+                   value="<?php echo substr(trim($_billingInfo['telephone']), 0, 10) ?>"
+                   maxlength="10"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_calley_numero" class="required">
+            <em>*</em><?php echo $this->__('Calle y N&uacute;mero') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Calle y N&uacute;mero') ?>"
+                   class="input-text required-entry validate-length maximum-length-45"
+                   id="<?php echo $_code ?>_calley_numero"
+                   name="payment[calley_numero]"
+                   value="<?php echo substr(trim($_billingInfo['street']), 0, 45) ?>"
+                   maxlength="45"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_colonia" >
+            <em>*</em><?php echo $this->__('Colonia') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Colonia') ?>"
+                   class="input-text validate-length maximum-length-30"
+                   id="<?php echo $_code ?>_colonia"
+                   name="payment[colonia]"
+                   value=""
+                   maxlength="30"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_municipio" class="required">
+            <em>*</em><?php echo $this->__('Municipio') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Municipio') ?>"
+                   class="input-text required-entry validate-length maximum-length-30"
+                   id="<?php echo $_code ?>_municipio"
+                   name="payment[municipio]"
+                   value="<?php echo substr(trim($_billingInfo['city']), 0, 30) ?>"
+                   maxlength="30"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_estado" class="required">
+            <em>*</em><?php echo $this->__('Estado') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Estado') ?>"
+                   class="input-text required-entry validate-length maximum-length-45"
+                   id="<?php echo $_code ?>_estado"
+                   name="payment[estado]"
+                   value="<?php echo substr(trim($_billingInfo['region']), 0, 45) ?>"
+                   maxlength="45"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_pais" class="required">
+            <em>*</em><?php echo $this->__('Pa&iacute;s') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Pa&iacute;s') ?>"
+                   class="input-text required-entry validate-length maximum-length-50"
+                   id="<?php echo $_code ?>_pais"
+                   name="payment[pais]"
+                   value="<?php echo substr(trim($_billingInfo['country']), 0, 50) ?>"
+                   maxlength="50"
+            />
+        </div>
+    </li>
+    
+    <li>
+        <label for="<?php echo $_code ?>_cp" class="required">
+            <em>*</em><?php echo $this->__('C&oacute;digo Postal') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('C&oacute;digo Postal') ?>"
+                   class="input-text required-entry validate-zip-international validate-length maximum-length-9"
+                   id="<?php echo $_code ?>_cp"
+                   name="payment[cp]"
+                   value="<?php echo substr(trim($_billingInfo['postcode']), 0, 9) ?>"
+                   maxlength="9"
+            />
+        </div>
+    </li>
+            
+    <li>
+        <label for="<?php echo $_code ?>_email" class="required">
+            <em>*</em><?php echo $this->__('Correo Electr&oacute;nico') ?> :
+        </label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Correo Electr&oacute;nico') ?>"
+                   class="input-text required-entry validate-email validate-length maximum-length-200"
+                   id="<?php echo $_code ?>_email"
+                   name="payment[email]"
+                   value="<?php echo substr(trim($_billingInfo['email']), 0, 200) ?>"
+                   maxlength="200"
+            />
+        </div>
+    </li>
+<?php
+    if ($_model->enabledMSI())
+    {
+?>
+    <li>
+        <label for="<?php echo $_code ?>_msi" class="required">
+            <?php echo $this->__('Meses Sin Intereses') ?> :
+        </label>
+        <div class="input-box">
+            <select class="" id="<?php echo $_code ?>_msi" name="payment[msi]">
+                <option value="00">Seleccione</option>
+                <optgroup label="MasterCard/Visa"></optgroup>
+                <option value="03">3 Meses</option>
+                <option value="06">6 Meses</option>
+				<option value="09">9 Meses</option>
+                <option value="12">12 Meses</option>
+                <optgroup label="American Express"></optgroup>
+                <option value="03">3 Meses</option>
+                <option value="06">6 Meses</option>
+                <option value="09">9 Meses</option>
+                <option value="12">12 Meses</option>
+            </select>
+        </div>
+    </li>    
+<?php
+    }
+?>
+</ul>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <sections>
+        <payment>
+            <groups>
+                <pagofacildirect translate="label" module="paygate">
+                    <label><![CDATA[PagoF&aacute;cil]]></label>
+                    <sort_order>501</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment></comment>
+                    
+                    <fields>
+                        <active translate="label">
+                            <label>Habilitado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>                        
+                        <status translate="label">
+                            <label>Estado de la Orden</label>
+                            <!-- <comment>despu&eacute;s de autorizar y cobrar en PagoF&aacute;cil</comment> -->
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagofacildirect/source</source_model>                            
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </status>                                          
+                        <title translate="label">
+                            <label>Servicio</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <prod translate="label">
+                            <label><![CDATA[Entorno Producci&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </prod>                        
+                        <sucursalkey translate="label">
+                            <label>API Sucursal</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sucursalkey>
+                        <usuariokey translate="label">
+                            <label>API Usuario</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </usuariokey>
+                        <notify translate="label">
+                            <label><![CDATA[Enviar Notificaci&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </notify>
+                        <divisa translate="label">
+                            <label>Divisa (USD a MXN)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </divisa>
+                        <msi translate="label">
+                            <label>Habilitar Meses sin Intereses</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </msi>
+                        <logo translate="label">
+                            <label><![CDATA[Mostrar Logotipo]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logo>
+                    </fields>                    
+                </pagofacildirect>
+                <compropago translate="label" module="paygate">
+                    <label>Pago Facil - Efectivo</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Habilitar</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label,comment">
+                            <label>Título</label>
+                            <comment>
+                                <![CDATA[
+                                    Este campo se mostrará como etiqueta de metodo de pago.
+                                ]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+                        <prod translate="label">
+                            <label><![CDATA[Entorno Producci&oacute;n]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </prod> 
+                        <sucursalkey translate="label">
+                            <label>API Sucursal</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sucursalkey>
+                        <usuariokey translate="label">
+                            <label>API Usuario</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </usuariokey>
+                        <order_status_new translate="label">
+                            <label>Elegir estado de nuevas ordenes</label>
+                            <comment>
+                            <![CDATA[
+                                Ir a "system -> OrderStatuses" y asignar una nueva orden de estado personalizada en la opción de 'new'.                  
+                            ]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_new>
+                        <order_status_approved translate="label">
+                            <label>Elegir estado de ordenes aprovadas</label>
+                            <comment>
+                                <![CDATA[
+                                    Ir a "system -> OrderStatuses" y asignar una nueva orden de estado personalizada en la opción de 'new'.
+                                ]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_approved>
+                        <order_status_in_process translate="label">
+                            <label>Elegir estado de ordenes pendientes</label>
+                            <comment>
+                                <![CDATA[
+                                    Ir a "system -> OrderStatuses" y asignar una nueva orden de estado personalizada en la opción de 'new'.
+                                ]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_in_process>
+                        <order_status_cancelled translate="label">
+                            <label>Elegir el estado de las ordenes canceladas</label>
+                            <comment>
+                                <![CDATA[
+                                    Ir a "system -> OrderStatuses" y asignar una nueva orden de estado personalizada en la opción de 'new'.   
+                                ]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_cancelled>
+                    </fields>
+                </compropago>
+            </groups>
+        </payment>
+    </sections>
+</config>

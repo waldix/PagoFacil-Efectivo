@@ -1,0 +1,94 @@
+<?php
+/**
+ * @author waldix <waldix86@gmail.com>
+ */
+?>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('css/pagofacil/pagofacil.css'); ?>" />
+<link href="<?php echo $this->getSkinUrl('css/pagofacil/pagofacil.css'); ?>" rel="stylesheet" type="text/css" media="screen, print" />
+<div class="page-title">
+    <h3>¡Felicitaciones! Su pedido ha sido generado correctamente.</h3>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $convenience_store = Mage::getSingleton('core/session')->getConvenienceStore();
+      $store_fixed_rate = Mage::getSingleton('core/session')->getStoreFixedRate();
+      $store_schedule = Mage::getSingleton('core/session')->getStoreSchedule();
+      $store_image = Mage::getSingleton('core/session')->getStoreImage();
+      $bank_account_number = Mage::getSingleton('core/session')->getBankAccountNumber();
+      $bank = Mage::getSingleton('core/session')->getBank();
+      $expiration_date = Mage::getSingleton('core/session')->getExpirationDate();
+      $amount = Mage::getSingleton('core/session')->getAmount();
+      $reference = Mage::getSingleton('core/session')->getReference();
+      $name = Mage::getSingleton('core/session')->getNameItem();
+?>
+
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>         
+    <div class="cp-instruction-section">
+      <div class="expiration-date">
+        Último día para pagar:
+        <span >
+        <?php echo date('d-m-Y', strtotime($this->__($expiration_date)))  ?>
+        </span>
+      </div>
+
+      <div class="cp-title">Seguir los siguientes pasos:</div>
+
+      <div class="cp-step-box">
+        <div class="cp-step">
+              <div class="cp-num">1.</div> <span> Ir a la caja <?php echo $this->__($convenience_store) ?> de <?php echo $this->__($store_schedule) ?> </span> <img src="<?php echo $this->__($store_image) ?>" class="cp-image-store" />
+        </div>
+        <div class="cp-step">
+              <div class="cp-num">2.</div> Solicitar depósito a cuenta (debito): <?php echo $this->__($bank) ?> - <?php echo $this->__($bank_account_number) ?>
+        </div>
+        <div class="cp-step">
+            <div class="cp-num">3.</div> Deposita la cantidad <b>EXACTA</b> de: $<b><?php echo $this->__($amount) ?></b>
+        </div>
+      </div>
+      <hr class="cp-grey">
+      <span class="cp-note" style="font-size:12px;color: #333;">Oxxo/7Eleven/Extra cobra en caja una comisión de $7.00/$8.00 por concepto de recepción de cobranza.</span>
+    </div>
+
+  <div class="cp-warning-box">
+        <img src="<?php echo $this->getSkinUrl('images/pagofacil/warning.png'); ?>" style="margin: -7px 0px 0px 0px;"> 
+        <span style="font-size: 12px;"><b>Importante</b></span>
+        <ul style="" class="cp-warning">
+        <li>El ID de control es: <b><?php echo $this->__($reference) ?></b></li>
+       <li>El número de cuenta/tarjeta asignado es único por cada orden de compra.</li>
+         <li>Orden válida antes de <?php echo date('d/m/Y', strtotime($this->__($expiration_date)))  ?>, en caso de vencimiento genera una nueva compra.</li>
+
+        <li>Las tiendas <?php echo $this->__($convenience_store) ?> cobran en caja una comisión de $ <?php echo $this->__($store_fixed_rate) ?> por el concepto de recepción de cobranza.</li>
+
+        </ul>
+    </div>   
+<?php endif;?>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+    <p>
+        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+<?php endif;?>
+
+<?php if ($this->getAgreementRefId()): ?>
+    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+
+<div class="buttons-set"> 
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+    <button type="button" class="button" title="Imprimir" onclick="window.print(); return false;"><span><span>Imprimir</span></span></button>
+</div>
+
+    <button type="button" class="button" title="Imprimir" onclick="window.print(); return false;"><span><span>Imprimir</span></span></button>
+</div>
