@@ -178,12 +178,12 @@ class Pagofacil_Pagofacildirect_Model_CashCP extends Mage_Payment_Model_Method_A
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_USERPWD, $username . ":");
 
-        // Blindly accept the certificate
+        // Blindly accept the certificate.
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $this->_response = curl_exec($ch);
         curl_close($ch);
 
-        // tratamiento de la respuesta del servicio
+        // tratamiento de la respuesta del servicio.
         $response = json_decode($this->_response,true);
           
         return $response;
