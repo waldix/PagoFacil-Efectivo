@@ -141,7 +141,7 @@ class Pagofacil_Pagofacildirect_Model_CashCP extends Mage_Payment_Model_Method_A
             }                        
             Mage::throwException($errorMessage);
         } else {
-            //Se almacenan los datos de la respuesta en session para posteriormente mostrarlos en el success
+            //Se almacenan los datos de la respuesta en session para posteriormente mostrarlos en el success.
             $convenience_store = $response['charge']['convenience_store'];
             $store_fixed_rate = $response['charge']['store_fixed_rate'];
             $store_schedule = $response['charge']['store_schedule'];
@@ -176,7 +176,7 @@ class Pagofacil_Pagofacildirect_Model_CashCP extends Mage_Payment_Model_Method_A
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+        curl_setopt($ch, CURLOPT_USERPWD, $username . ":");
 
         // Blindly accept the certificate
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
