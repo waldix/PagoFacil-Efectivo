@@ -109,6 +109,7 @@ class Pagofacil_Pagofacildirect_Model_CashCP extends Mage_Payment_Model_Method_A
         // obtener datos del pago en info y asignar monto total
         $infoIntance = $this->getInfoInstance();
         $info = unserialize($infoIntance->getAdditionalData());
+        $info['prod'] = trim($this->getConfigData('prod'));
         $info['order_id'] = $orderNumber;
         $info['branch_key'] = trim($this->getConfigData('sucursalkey'));
         $info['user_key'] = trim($this->getConfigData('usuariokey'));
@@ -171,7 +172,7 @@ class Pagofacil_Pagofacildirect_Model_CashCP extends Mage_Payment_Model_Method_A
     {
         $url = 'http://api-staging-compropago.herokuapp.com/v1/providers/'; 
         $url.= 'true';        
-        $username = 'pagofacil';
+        $username = 'sk_live_49b048710b3104021';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

@@ -19,7 +19,22 @@ class Pagofacil_Pagofacildirect_WebhookController extends Mage_Core_Controller_F
 		$_order = Mage::getModel('sales/order')->loadByIncrementId($_id);
 
 		switch ($_type) {    
-			case 'pagada':
+			case 1:
+			    $status = $config->getConfigData('order_status_in_process');
+			    $message = 'The user has not completed the payment process yet.';
+			    $_order->addStatusToHistory($status, $message);
+			    break;
+		    case 2:
+			    $status = $config->getConfigData('order_status_in_process');
+			    $message = 'The user has not completed the payment process yet.';
+			    $_order->addStatusToHistory($status, $message);
+			    break;
+			case 3:         
+				$status = $config->getConfigData('order_status_cancelled');
+			    $message = 'The user has not completed the payment and the order was cancelled.';
+				$_order->cancel();
+				break;
+			case 4:
 			    $createinvoice = Mage::getModel('pagofacildirect/CashCP')->getConfigData('auto_create_inovice');
 			    if ($createinvoice == 1){     
 					if(!$_order->hasInvoices()){
@@ -41,16 +56,6 @@ class Pagofacil_Pagofacildirect_WebhookController extends Mage_Core_Controller_F
 					$_order->addStatusToHistory($status,$message,true);				
 			    }
 			    break;
-		    case 'pendiente':
-			    $status = $config->getConfigData('order_status_in_process');
-			    $message = 'The user has not completed the payment process yet.';
-			    $_order->addStatusToHistory($status, $message);
-			    break;
-			case 'cancelada':         
-				$status = $config->getConfigData('order_status_cancelled');
-			    $message = 'The user has not completed the payment and the order was cancelled.';
-				$_order->cancel();
-				break;
 			default:
 			    $status = $config->getConfigData('order_status_in_process');
 			    $message = "";    

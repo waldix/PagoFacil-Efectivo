@@ -147,11 +147,11 @@ class Pagofacil_Pagofacildirect_Model_Api
             throw new Exception('parameter is not an array');
         }
 
-        $info['url'] = 'https://www.pagofacil.net/st/public/cash/charge';
+        $info['url'] = 'https://www.pagofacil.net/ws/public/cash/charge';
         // determinar si el entorno es para pruebas
         if ($info['prod'] == '0')
         {
-            $info['url'] = 'https://www.pagofacil.net/ws/public/cash/charge';
+            $info['url'] = 'https://www.pagofacil.net/st/public/cash/charge';
             $info['branch_key'] = $this->_sucursalKeyDemo;
             $info['user_key'] = $this->_usuarioKeyDemo;
         }
