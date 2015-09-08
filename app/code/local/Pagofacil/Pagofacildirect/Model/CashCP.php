@@ -170,9 +170,9 @@ class Pagofacil_Pagofacildirect_Model_CashCP extends Mage_Payment_Model_Method_A
     
     public function getProviders()
     {
-        $url = 'http://api-staging-compropago.herokuapp.com/v1/providers/'; 
+        $url = 'http://api-compropago.herokuapp.com/v1/providers/'; 
         $url.= 'true';        
-        $username = 'sk_live_49b048710b3104021';
+        $username = 'pk_live_508992456a45414a9';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
